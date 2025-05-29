@@ -3,6 +3,7 @@
 import { useState, useRef } from "react"
 import { debounce } from 'lodash'
 import { changeName } from '../_actions/change-name'
+import { toast } from "sonner"
 
 export function Name({ name }: { name: string }) {
     const [initialName, setInitialName] = useState(name)
@@ -19,9 +20,13 @@ export function Name({ name }: { name: string }) {
                 try {
                     const response = await changeName({ name: currentName })
                     if (response.error) {
+                        toast.error("Erro ao alterar o nome");
                         setInitialName(originalName);
                         return;
                     }
+
+                    toast.success("Nome alterado com sucesso!");
+
                 } catch (error) {
                     console.log(error)
                 }
