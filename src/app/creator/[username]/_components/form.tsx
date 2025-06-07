@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { createPayment } from "../actions/create-payment";
 
 const schema = z.object({
     name: z.string().min(1, "O nome é obrigatório"),
@@ -20,7 +21,13 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function FormDonate() {
+interface FormDonateProps {
+    creatorId: string;
+    slug: string;
+}
+
+
+export default function FormDonate({ slug, creatorId }: FormDonateProps) {
 
     const form = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -31,8 +38,17 @@ export default function FormDonate() {
         },
     })
 
-    function handleSubmit(data: FormData) {
-        console.log(data);
+    async function handleSubmit(data: FormData) {
+
+        const priceInCents = Number(data.price) * 100 // valor em centavos
+
+        const checkout = await createPayment({
+            name: data.name,
+            message: data.message,
+            creatorId: creatorId,
+            slug: slug,
+            price: priceInCents
+        })
     }
 
 
