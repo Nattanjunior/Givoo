@@ -10,6 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { createPayment } from "../actions/create-payment";
+import { toast } from "sonner";
+import { getStripejs } from "@/lib/stripe-js";
 
 const schema = z.object({
     name: z.string().min(1, "O nome é obrigatório"),
@@ -49,6 +51,20 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
             slug: slug,
             price: priceInCents
         })
+
+        if (checkout?.error) {
+            toast.error(checkout.error);
+            return;
+        }
+
+        if (checkout?.data) {
+            const data = JSON.parse(checkout.data);
+            const stripe = await getStripejs();
+
+            await stripe?.redirectToCheckout({
+                sessionId: data.id as string
+            })
+        }
     }
 
 
@@ -112,7 +128,13 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Fazer doação</Button>
+                <Button
+                    type="submit"
+                    disabled={form.formState.isSubmitting}
+                >
+
+                    {form.formState.isSubmitting ? "Carregando..." : "Fazer doação"}
+                </Button>
             </form>
         </Form>
     );

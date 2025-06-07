@@ -12,4 +12,5 @@ interface User {
     email?: string;
     username?: string;
     bio?: string;
+    connectedStripeAccountId?: string;
 }
