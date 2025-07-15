@@ -2,7 +2,6 @@
 
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/lib/stripe'
-import { floor } from 'lodash'
 import { z } from 'zod'
 
 
@@ -84,10 +83,13 @@ export async function createPayment(data: CreatePaymentSchema) {
       }
     })
 
+    return {
+      sessionId: session.id
+    }
+
 
   } catch (error) {
     return {
-      data: null,
       error: "Falha ao criar pagamento, tente mais tarde"
     }
   }
