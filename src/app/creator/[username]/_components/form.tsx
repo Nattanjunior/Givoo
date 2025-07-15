@@ -52,19 +52,35 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
             price: priceInCents
         })
 
+        await handlePayementResponse(checkout)
+
+    }
+
+
+    async function handlePayementResponse(checkout: { sessionId?: string, error?: string }) {
+
         if (checkout?.error) {
             toast.error(checkout.error);
             return;
         }
 
-        if (checkout?.data) {
-            const data = JSON.parse(checkout.data);
-            const stripe = await getStripejs();
-
-            await stripe?.redirectToCheckout({
-                sessionId: data.id as string
-            })
+        if (!checkout.sessionId) {
+            toast.error("Falha ao criar o pagamento, tente mais tarde")
+            return;
         }
+
+        const stripe = await getStripejs();
+
+        if (!stripe) {
+            toast.error("Falha ao criar o pagamento, tente mais tarde")
+            return;
+        }
+
+        await stripe?.redirectToCheckout({
+            sessionId: checkout.sessionId
+        })
+
+        console.log('PASSOU AQUI')
     }
 
 
