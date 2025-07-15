@@ -64,7 +64,7 @@ export default async function Apoia({
             {user.name ? `Doar para ${user.name}` : "Apoiar criador"}
           </h3>
 
-          <FormDonate slug={user.username!} creatorId={user.connectedStripeAccountId ?? ""} />
+          <FormDonate slug={user.username!} creatorId={user.id ?? ""} />
 
         </section>
       </div>
