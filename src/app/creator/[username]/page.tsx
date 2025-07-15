@@ -14,8 +14,7 @@ export default async function Apoia({
 
   const user = await getInfoUser({ username });
 
-
-  if (!user) {
+  if (!user || "success" in user) {
     notFound();
   }
 
@@ -44,7 +43,6 @@ export default async function Apoia({
             <FormDonate
               slug={user.username!}
               creatorId={user.id ?? ""} />
-
 
           </div>
 
