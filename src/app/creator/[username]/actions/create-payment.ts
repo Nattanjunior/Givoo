@@ -18,8 +18,9 @@ type CreatePaymentSchema = z.infer<typeof createPaymentSchema>
 export async function createPayment(data: CreatePaymentSchema) {
 
   const schema = createPaymentSchema.safeParse(data)
-
+  console.log('[createPayment] Dados recebidos:', data)
   if (!schema.success) {
+    console.log('[createPayment] Erro de validação:', schema.error.issues)
     return {
       data: null,
       error: schema.error.issues[0].message
@@ -32,8 +33,10 @@ export async function createPayment(data: CreatePaymentSchema) {
         id: data.creatorId
       }
     })
+    console.log('[createPayment] Creator encontrado:', creator)
 
     if (!creator) {
+      console.log('[createPayment] Creator não encontrado para o id:', data.creatorId)
       return {
         data: null,
         error: "Falha ao criar pagamento, tente mais tarde"
@@ -42,6 +45,7 @@ export async function createPayment(data: CreatePaymentSchema) {
 
 
     const applicationFeesAccount = Math.floor(data.price * 0.1)
+    console.log('[createPayment] Taxa da aplicação:', applicationFeesAccount)
 
     const donation = await prisma.donation.create({
       data: {
@@ -52,6 +56,7 @@ export async function createPayment(data: CreatePaymentSchema) {
         amount: (data.price - applicationFeesAccount)
       }
     })
+    console.log('[createPayment] Donation criada:', donation)
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -82,6 +87,7 @@ export async function createPayment(data: CreatePaymentSchema) {
         }
       }
     })
+    console.log('[createPayment] Sessão Stripe criada:', session)
 
     return {
       sessionId: session.id
@@ -89,6 +95,7 @@ export async function createPayment(data: CreatePaymentSchema) {
 
 
   } catch (error) {
+    console.log('[createPayment] Erro no try/catch:', error)
     return {
       error: "Falha ao criar pagamento, tente mais tarde"
     }
