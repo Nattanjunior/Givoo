@@ -97,7 +97,8 @@ export async function createPayment(data: CreatePaymentSchema) {
   } catch (error) {
     console.log('[createPayment] Erro no try/catch:', error)
     return {
-      error: "Falha ao criar pagamento, tente mais tarde"
+      error: error,
+      failed: "Falha ao criar pagamento, tente mais tarde"
     }
   }
 }
