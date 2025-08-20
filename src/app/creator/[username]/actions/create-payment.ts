@@ -97,7 +97,7 @@ export async function createPayment(data: CreatePaymentSchema) {
   } catch (error) {
     console.log('[createPayment] Erro no try/catch:', error)
     return {
-      error: error,
+      // error: error,
       failed: "Failed to create payment session"
     }
   }
