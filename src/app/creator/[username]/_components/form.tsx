@@ -61,7 +61,7 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
     async function handlePayementResponse(checkout: { sessionId?: string, error?: string }) {
 
         if (checkout?.error) {
-            console.log("ERROR CHECKOUT:",checkout.error)
+            console.log("ERROR CHECKOUT:",checkout)
 
             toast.error(checkout.error);
             return;
