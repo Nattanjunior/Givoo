@@ -35,7 +35,7 @@ export async function createPayment(data: CreatePaymentSchema) {
     if (!creator) {
       return {
         data: null,
-        error: "Falha ao criar pagamento, tente mais tardeeeeeeeee"
+        error: "Falha ao criar pagamento, tente mais tarde"
       }
     }
 
@@ -90,7 +90,7 @@ export async function createPayment(data: CreatePaymentSchema) {
   } catch (error) {
     console.log('[createPayment] Erro no try/catch:', error)
     return {
-      error: "Falha ao criar pagamento, tvole rapasdvms"
+      error: `Falha ao criar pagamento, ${error} `
     }
   }
 }
