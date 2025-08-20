@@ -44,7 +44,7 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
     async function handleSubmit(data: FormData) {
 
         const priceInCents = Number(data.price) * 100 // valor em centavos
-
+        console.log("ERRO ESTA ANTES DAQUI")
         const checkout = await createPayment({
             name: data.name,
             message: data.message,
@@ -52,6 +52,7 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
             slug: slug,
             price: priceInCents
         })
+        console.log("ERRO ESTA DEPOIS DAQUI:", checkout)
 
         await handlePayementResponse(checkout)
 
@@ -61,14 +62,14 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
     async function handlePayementResponse(checkout: { sessionId?: string, error?: string }) {
 
         if (checkout?.error) {
-            console.log("ERROR CHECKOUT:",checkout)
+            console.log("ERROR CHECKOUT:", checkout)
 
             toast.error(checkout.error);
             return;
         }
 
         if (!checkout.sessionId) {
-            console.log("ERROR CHECKOUT2:",checkout)
+            console.log("ERROR CHECKOUT2:", checkout)
 
             toast.error("Falha ao criar o pagamento, tente mais tarde")
             return;
@@ -77,7 +78,7 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
         const stripe = await getStripejs();
 
         if (!stripe) {
-            console.log("ERROR STRIPE:",stripe)
+            console.log("ERROR STRIPE:", stripe)
 
             toast.error("Falha ao criar o pagamento, tente mais tarde")
             return;
