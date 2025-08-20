@@ -61,11 +61,15 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
     async function handlePayementResponse(checkout: { sessionId?: string, error?: string }) {
 
         if (checkout?.error) {
+            console.log("ERROR CHECKOUT:",checkout.error)
+
             toast.error(checkout.error);
             return;
         }
 
         if (!checkout.sessionId) {
+            console.log("ERROR CHECKOUT2:",checkout)
+
             toast.error("Falha ao criar o pagamento, tente mais tarde")
             return;
         }
@@ -73,6 +77,8 @@ export default function FormDonate({ slug, creatorId }: FormDonateProps) {
         const stripe = await getStripejs();
 
         if (!stripe) {
+            console.log("ERROR STRIPE:",stripe)
+
             toast.error("Falha ao criar o pagamento, tente mais tarde")
             return;
         }
