@@ -17,7 +17,6 @@ export function CreateAccountButton() {
           "Content-Type": "application/json"
         },
       })
-
       const data = await res.json();
 
       if (!res.ok) {
@@ -29,7 +28,6 @@ export function CreateAccountButton() {
       window.location.href = data.url;
 
     } catch (error) {
-      console.log(error)
       setLoading(false)
     }
   }
@@ -41,7 +39,7 @@ export function CreateAccountButton() {
         onClick={hnadleCreateStripeAccount}
         disabled={loading}
       >
-        {loading ? "Carregando..." : "Ativa conta de pagamentos"}
+        {loading ? "Carregando..." : "Ativar conta de pagamento Stripe"}
       </Button>
     </div>
   )

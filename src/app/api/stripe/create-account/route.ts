@@ -9,7 +9,6 @@ export const POST = auth(async function POST(request) {
   }
 
   try {
-
     const account = await stripe.accounts.create({
       controller: {
         losses: {
@@ -27,7 +26,6 @@ export const POST = auth(async function POST(request) {
     if (!account.id) {
       return NextResponse.json({ error: "Falha ao criar conta de pagamento" }, { status: 400 })
     }
-
     await prisma.user.update({
       where: {
         id: request.auth.user.id
@@ -36,7 +34,6 @@ export const POST = auth(async function POST(request) {
         connectedStripeAccountId: account.id
       }
     })
-
     const accountLink = await stripe.accountLinks.create({
       account: account.id,
       refresh_url: `${process.env.HOST_URL!}/dashboard`,
@@ -44,10 +41,9 @@ export const POST = auth(async function POST(request) {
       type: "account_onboarding"
     })
 
-
     return NextResponse.json({ url: accountLink?.url }, { status: 200 })
 
   } catch (error) {
-    return NextResponse.json({ error: "Flaha ao criar link de configuracao" }, { status: 400 })
+    return NextResponse.json({ error: "Falha ao criar link de configuração", detalhe: String(error) }, { status: 400 })
   }
 })
