@@ -1,12 +1,22 @@
-// Arquivo: gerar-login-link.js
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// src/app/api/stripe/route.ts
+import Stripe from "stripe";
 
-async function gerarLoginLink() {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+export async function GET() {
   try {
-    const loginLink = await stripe.accounts.createLoginLink('acct_1RnQQPPw3RD2ry7F');
+    const loginLink = await stripe.accounts.createLoginLink(
+      "acct_1RnQPPw3RD2ry7F"
+    );
+
+    return new Response(
+      JSON.stringify({ url: loginLink.url }),
+      { status: 200 }
+    );
   } catch (error) {
-    throw new Error("Falha ao criar link de configuração")
+    return new Response(
+      JSON.stringify({ error: "Erro ao criar link" }),
+      { status: 500 }
+    );
   }
 }
-
-gerarLoginLink();
