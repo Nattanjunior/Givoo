@@ -1,7 +1,9 @@
 import { FeatureCard } from "@/components/FeatureCard";
 import { Button } from "@/components/ui/button";
 import { signIn } from "@/lib/auth";
+
 import { ArrowRight, HandCoins, Heart, Shield, Zap } from "lucide-react";
+import { TextDinamic } from "@/components/text-dinamic";
 
 
 export default function Home() {
@@ -14,31 +16,29 @@ export default function Home() {
 
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50 z-50">
       <header className="container mx-auto py-6 px-4">
         <div className="flex items-center">
           <div className="flex items-center text-amber-500 font-bold text-xl">
             <HandCoins className="h-6 w-6 mr-2" />
-            <span>ApoiaDev</span>
+            <span>Givoo</span>
           </div>
         </div>
       </header>
-
       <main className="flex-1 flex items-center justify-center">
         <div className="container mx-auto px-4 py-12 md:py-24">
           <div className="max-w-3xl mx-auto">
             <div className="text-center space-y-6">
               <div className="inline-block bg-amber-100 text-amber-800 px-4 py-1.5 rounded-full text-sm font-medium mb-2">
-                Plataforma para criadores de conteúdo
+               <TextDinamic />
               </div>
 
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-400">
-                Monetize seu público de forma descomplicada
+                A maneira mais fácil de receber doações online
               </h1>
 
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Receba doações diretamente dos seus seguidores através de uma página personalizada e elegante, sem
-                complicações.
+                Receba doações e apoios de forma rápida e segura, com uma página personalizada para você ou sua instituição.
               </p>
 
               <div className="pt-4">
@@ -46,7 +46,7 @@ export default function Home() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-8 h-12"
+                    className="bg-amber-500 hover:bg-amber-600 text-white font-medium px-8 h-12 z-40"
                   >
                     Começar agora
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -76,6 +76,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+
     </div>
   );
 }
