@@ -16,28 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Apoia-dev",
-  description: "Apoia-dev é uma plataforma para criadores receberem doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para desenvolvedores, streamers e produtores de conteúdo que desejam monetizar seu trabalho online.",
+  title: "Givoo",
+  description: "Givoo é uma plataforma para criadores receberem doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para desenvolvedores, streamers e produtores de conteúdo que desejam monetizar seu trabalho online.",
   keywords: [
     "doação", "criadores de conteúdo", "Stripe", "monetização", "apoio", "streamer", "desenvolvedor", "produtor de conteúdo", "pagamento online", "financiamento coletivo"
   ],
-  authors: [{ name: "Equipe Apoia-dev", url: "https://apoia.dev" }],
+  authors: [{ name: "Equipe Givoo", url: "https://givoo.vercel.app" }],
   robots: {
     index: true,
     follow: true,
     nocache: false,
   },
   openGraph: {
-    title: "Apoia-dev | Monetize seu conteúdo com doações",
+    title: "Givoo | Monetize seu conteúdo com doações",
     description: "Receba doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para criadores, desenvolvedores e streamers.",
-    url: "https://apoia.dev",
-    siteName: "Apoia-dev",
+    url: "https://givoo.vercel.app",
+    siteName: "Givoo",
     images: [
       {
         url: "/public/globe.svg",
         width: 1200,
         height: 630,
-        alt: "Apoia-dev - Plataforma para criadores de conteúdo"
+        alt: "Givoo - Plataforma para criadores de conteúdo"
       }
     ],
     locale: "pt_BR",
@@ -45,19 +45,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Apoia-dev | Monetize seu conteúdo com doações",
+    title: "Givoo | Monetize seu conteúdo com doações",
     description: "Receba doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe.",
     images: ["/public/globe.svg"],
-    creator: "@apoia_dev"
+    creator: "@givoo"
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
     apple: "/favicon.ico"
   },
-  metadataBase: new URL("https://apoia.dev"),
+  metadataBase: new URL("https://givoo.vercel.app"),
   alternates: {
-    canonical: "https://apoia.dev"
+    canonical: "https://givoo.vercel.app"
   }
 };
 
