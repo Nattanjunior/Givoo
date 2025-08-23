@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Givoo",
-  description: "Givoo é uma plataforma para criadores receberem doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para desenvolvedores, streamers e produtores de conteúdo que desejam monetizar seu trabalho online.",
+  description: "Givoo é uma plataforma para criadores receberem doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para todos, streamers, produtores de conteúdo e vários outros que desejam monetizar seu trabalho online.",
   keywords: [
     "doação", "criadores de conteúdo", "Stripe", "monetização", "apoio", "streamer", "desenvolvedor", "produtor de conteúdo", "pagamento online", "financiamento coletivo"
   ],
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Givoo | Monetize seu conteúdo com doações",
-    description: "Receba doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para criadores, desenvolvedores e streamers.",
+    description: "Receba doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para todos, streamers, produtores de conteúdo e vários outros que desejam monetizar seu trabalho online.",
     url: "https://givoo.vercel.app",
     siteName: "Givoo",
     images: [
@@ -37,18 +37,11 @@ export const metadata: Metadata = {
         url: "/public/globe.svg",
         width: 1200,
         height: 630,
-        alt: "Givoo - Plataforma para criadores de conteúdo"
+        alt: "Givoo - Plataforma de doações"
       }
     ],
     locale: "pt_BR",
     type: "website"
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Givoo | Monetize seu conteúdo com doações",
-    description: "Receba doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe.",
-    images: ["/public/globe.svg"],
-    creator: "@givoo"
   },
   icons: {
     icon: "/favicon.ico",
