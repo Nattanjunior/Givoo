@@ -54,8 +54,7 @@ export default async function Dashboard() {
         <CreateAccountButton />
       )}
 
-      {session.user.connectedStripeAccountId &&
-        (stripeAccountStatus?.chargesEnabled && stripeAccountStatus?.payoutsEnabled) && (
+      {stripeAccountStatus?.chargesEnabled && stripeAccountStatus?.payoutsEnabled && (
 
         <>
           <Stats userId={session.user.id} stripeAccountId={session.user.connectedStripeAccountId ?? ""} />
