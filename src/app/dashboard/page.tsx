@@ -6,6 +6,7 @@ import { GetcreateLoginOnboardAccount } from "./data_acess/create-onboard-accoun
 import { CreateAccountButton } from "./_components/create-account-button";
 import { getAllDonates } from "./data_acess/get-donates";
 import { getStripeDashboard } from "./data_acess/get-stripe-dashboard";
+import Onboarding from "./_components/Onboarding";
 
 
 export default async function Dashboard() {
@@ -19,6 +20,7 @@ export default async function Dashboard() {
   const UrlStripeDashboard = await getStripeDashboard(session?.user.connectedStripeAccountId);
   // const donates = await getAllDonates(session.user.id);
 
+
   return (
     <div className="p-4">
       <section className="flex items-center justify-between mb-4">
@@ -26,12 +28,21 @@ export default async function Dashboard() {
           <h1 className="text-2xl font-semibold">Minha conta</h1>
 
           {UrlStripeDashboard && (
-            <a
-              href={UrlStripeDashboard}
-              target="_blank"
-              className="bg-zinc-900 px-4 py-1 rounded-md text-white cursor-pointer">
-              Ajustar conta
-            </a>
+            <>
+              <Onboarding
+                elementId="ajustar-conta"
+                title="Concluir configuração"
+                description="Complete a configuração da sua conta Stripe, para poder receber suas doações."
+              />
+
+              <a
+                id="ajustar-conta"
+                href={UrlStripeDashboard}
+                target="_blank"
+                className="bg-zinc-900 px-4 py-1 rounded-md text-white cursor-pointer">
+                Ajustar conta
+              </a>
+            </>
           )}
         </div>
       </section>
@@ -46,7 +57,7 @@ export default async function Dashboard() {
 
           <h2 className="text-2xl font-semibold mb-2">Últimas doações</h2>
 
-          <DonationTable  />
+          <DonationTable />
         </>
       )}
 
