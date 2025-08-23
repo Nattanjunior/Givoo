@@ -7,6 +7,7 @@ import { CreateAccountButton } from "./_components/create-account-button";
 import { getAllDonates } from "./data_acess/get-donates";
 import { getStripeDashboard } from "./data_acess/get-stripe-dashboard";
 import Onboarding from "./_components/Onboarding";
+import { getStripeAccountStatus } from "./data_acess/get-stripe-account-status";
 
 
 export default async function Dashboard() {
@@ -19,6 +20,7 @@ export default async function Dashboard() {
 
   const UrlStripeDashboard = await getStripeDashboard(session?.user.connectedStripeAccountId);
   // const donates = await getAllDonates(session.user.id);
+  const stripeAccountStatus = await getStripeAccountStatus(session?.user.connectedStripeAccountId as string);
 
 
   return (
@@ -51,7 +53,9 @@ export default async function Dashboard() {
         <CreateAccountButton />
       )}
 
-      {session.user.connectedStripeAccountId && (
+      {session.user.connectedStripeAccountId &&
+        (!stripeAccountStatus?.chargesEnabled || !stripeAccountStatus?.payoutsEnabled) && (
+
         <>
           <Stats userId={session.user.id} stripeAccountId={session.user.connectedStripeAccountId ?? ""} />
 
