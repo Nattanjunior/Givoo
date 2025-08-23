@@ -20,7 +20,7 @@ export function Header() {
           <Link href="/dashboard" className="flex items-center gap-1 text-amber-500">
             <HandCoins className="h-6 w-6 mr-2" />
             <span className="text-xl font-bold">
-              ApoiaDev
+              Givoo
             </span>
           </Link>
         </div>
