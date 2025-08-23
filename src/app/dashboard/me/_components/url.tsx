@@ -71,7 +71,7 @@ export default function UrlPreview({ username: slug }: UrlPreviewProps) {
                         </p>
                         <input
                             type="text"
-                            placeholder="Digite seu username..."
+                            placeholder="nome"
                             name="username"
                             className="flex-1 border outline-none h-8 rounded-md border-gray-300 text-black bg-gray-50 px-1 w-full"
                         />
