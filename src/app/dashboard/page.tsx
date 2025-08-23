@@ -49,12 +49,13 @@ export default async function Dashboard() {
         </div>
       </section>
 
-      {!session.user.connectedStripeAccountId && (
+      {!session.user.connectedStripeAccountId &&
+        (!stripeAccountStatus?.chargesEnabled || !stripeAccountStatus?.payoutsEnabled) && (
         <CreateAccountButton />
       )}
 
       {session.user.connectedStripeAccountId &&
-        (!stripeAccountStatus?.chargesEnabled || !stripeAccountStatus?.payoutsEnabled) && (
+        (stripeAccountStatus?.chargesEnabled && stripeAccountStatus?.payoutsEnabled) && (
 
         <>
           <Stats userId={session.user.id} stripeAccountId={session.user.connectedStripeAccountId ?? ""} />
