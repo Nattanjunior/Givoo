@@ -1,25 +1,24 @@
-# ApoiaDev (Em desenvolvimento)
+# Givoo (Em desenvolvimento)
 
-[![Deploy Vercel](https://vercel.com/button)](https://apoia-devv.vercel.app/)
+[![Deploy Vercel](https://vercel.com/button)](https://givoo.vercel.app/)
 
-**URL de produção:** [https://apoia-devv.vercel.app/](https://apoia-devv.vercel.app/)
+**URL de produção:** [https://givoo.vercel.app/](https://givoo.vercel.app/)
 
 ---
 
 ## Descrição
-ApoiaDev é uma plataforma moderna para criadores de conteúdo receberem doações e apoios de sua comunidade de forma simples, segura e integrada ao Stripe. Ideal para desenvolvedores, streamers, educadores e produtores de conteúdo que desejam monetizar seu trabalho online e criar uma conexão direta com seus apoiadores.
+Givoo é uma plataforma de doações simples, segura e integrada ao Stripe. Ideal para todos, streamers, produtores de conteúdo e vários outros que desejam monetizar seu trabalho online.
 
 ---
 
 ## Funcionalidades
-- **Página personalizada para cada criador**
+- **Página personalizada para cada usuário**
 - **Recebimento de doações via Stripe**
 - **Dashboard com estatísticas de doações**
-- **Gestão de perfil do criador (nome, bio, imagem, username customizável)**
+- **Gestão de perfil (nome, bio, imagem, username customizável)** 
 - **Login seguro via GitHub OAuth**
 - **Mensagens personalizadas dos apoiadores**
 - **Integração com Stripe Express para onboarding e dashboard financeiro**
-- **Experiência responsiva e moderna**
 
 ---
 
@@ -37,56 +36,64 @@ ApoiaDev é uma plataforma moderna para criadores de conteúdo receberem doaçõ
 
 ## Como rodar localmente
 
-1. **Clone o repositório:**
+## Configuração Local
+
+1. **Clone o repositório e instale as dependências:**
    ```bash
-   git clone https://github.com/Nattanjunior/ApoiaDev.git
-   cd ApoiaDev
+   git clone https://github.com/Nattanjunior/givoo.git
+   cd givoo
+   npm install # ou yarn install
    ```
-2. **Instale as dependências:**
-   ```bash
-   npm install
-   ```
-3. **Configure as variáveis de ambiente:**
-   Crie um arquivo `.env.local` baseado no exemplo abaixo:
+
+2. **Configure as variáveis de ambiente:**
+   Crie um arquivo `.env.local` na raiz do projeto e configure as seguintes variáveis:
+
    ```env
-   DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
-   NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=sua_secret
-   GITHUB_CLIENT_ID=xxxxxx
-   GITHUB_CLIENT_SECRET=xxxxxx
-   STRIPE_SECRET_KEY=sk_test_xxx
-   STRIPE_WEBHOOK_SECRET=whsec_xxx
-   NEXT_PUBLIC_HOST_URL=http://localhost:3000/
-   HOST_URL=http://localhost:3000/
+   # Database (PostgreSQL)
+   DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+
+   # NextAuth
+   AUTH_SECRET="your_secure_secret_key"
+
+   # GitHub OAuth (https://github.com/settings/developers)
+   GITHUB_CLIENT_ID="your_github_client_id"
+   GITHUB_CLIENT_SECRET="your_github_client_secret"
+
+   # Stripe (https://dashboard.stripe.com/apikeys)
+   STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
+   STRIPE_WEBHOOK_SECRET="whsec_your_stripe_webhook_secret"
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_your_publishable_key"
+
+   # Application URLs
+   NEXT_PUBLIC_HOST_URL="http://localhost:3000/"
+   HOST_URL="http://localhost:3000/"
    ```
-4. **Rode as migrations do banco:**
+
+3. **Configure o banco de dados e o Stripe:**
    ```bash
+   # Instale a CLI do Stripe (necessário para webhooks locais)
+   npm install -g stripe-cli
+
+   # Configure o banco de dados
+   npx prisma generate
    npx prisma migrate dev
+
+   # Em outro terminal, inicie o listener de webhooks do Stripe
+   stripe listen --forward-to localhost:3000/api/stripe/webhook
    ```
-5. **Inicie o projeto:**
+
+4. **Inicie o servidor de desenvolvimento:**
    ```bash
-   npm run dev
+   npm run dev # ou yarn dev
    ```
 
----
+   O projeto estará rodando em `http://localhost:3000`
 
-## Deploy em produção
-O projeto está publicado em: [https://apoia-dev-nxyo.vercel.app/](https://apoia-dev-nxyo.vercel.app/)
-
-Para deploy próprio, configure as variáveis de ambiente no painel da Vercel, incluindo:
-- `DATABASE_URL`
-- `NEXTAUTH_URL` (ex: https://seu-dominio.vercel.app)
-- `NEXTAUTH_SECRET`
-- `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET`
-- `STRIPE_SECRET_KEY` e `STRIPE_WEBHOOK_SECRET`
-- `NEXT_PUBLIC_HOST_URL` (ex: https://seu-dominio.vercel.app/)
-- `HOST_URL` (ex: https://seu-dominio.vercel.app/)
-
-**Importante:**
-- No GitHub OAuth App, adicione os dois callbacks:
-  - `http://localhost:3000/api/auth/callback/github`
-  - `https://apoia-dev-nxyo.vercel.app/api/auth/callback/github`
-- No Stripe, configure o webhook para: `https://apoia-dev-nxyo.vercel.app/api/stripe/webhook`
+5. **Configurações adicionais recomendadas:**
+   - Configure seu projeto no [GitHub OAuth](https://github.com/settings/developers)
+   - Crie uma conta no [Stripe](https://stripe.com) e configure as chaves
+   - Para testes, use os [cartões de teste do Stripe](https://stripe.com/docs/testing#cards)
+   - Configure o [PostgreSQL](https://www.postgresql.org/download/) localmente ou use um serviço como [Railway](https://railway.app)
 
 ---
 
@@ -96,7 +103,6 @@ Para deploy próprio, configure as variáveis de ambiente no painel da Vercel, i
 - `src/lib/` — Configurações de autenticação, Stripe e Prisma
 - `src/providers/` — Providers globais (ex: React Query)
 - `prisma/` — Migrations e schema do banco
-
 ---
 
 ## Principais arquivos e funções
