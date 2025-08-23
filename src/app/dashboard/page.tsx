@@ -30,7 +30,7 @@ export default async function Dashboard() {
           {UrlStripeDashboard && (
             <>
               <Onboarding
-                elementId="ajustar-conta"
+                elementId="#ajustar-conta"
                 title="Concluir configuração"
                 description="Complete a configuração da sua conta Stripe, para poder receber suas doações."
               />
