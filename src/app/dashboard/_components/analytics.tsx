@@ -1,4 +1,3 @@
-
 import { Users, DollarSign, Wallet } from "lucide-react";
 import { StatCard } from "./stats-card";
 import { getStats } from "../data_acess/get-stats-creator";
