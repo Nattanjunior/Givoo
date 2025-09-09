@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   Table,
   TableBody,
@@ -47,7 +47,7 @@ export function DonationTable() {
 
 
   return (
-    <>
+    <div>
       {/* Versão para desktop */}
       <div className="hidden lg:block">
         <Table>
@@ -97,7 +97,7 @@ export function DonationTable() {
           </Card>
         ))}
       </div>
-    </>
+    </div>
   )
 }
 
