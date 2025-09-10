@@ -10,7 +10,7 @@
 Givoo é uma plataforma de doações simples, segura e integrada ao Stripe. Ideal para todos, streamers, produtores de conteúdo e vários outros que desejam monetizar seu trabalho online.
 
 ### 🎥 Demonstração do Projeto
-![Demonstração do Givoo](gravar_tela_givoo.mp4)
+![Demonstração do Givoo](gravar_tela_givoo.gif)
 
 ---
 
